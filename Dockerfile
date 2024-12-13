@@ -28,7 +28,7 @@ COPY --from=compiler /code_folder/target/noticeboard-0.0.1-SNAPSHOT.jar ssf_asse
 ENV SERVER_PORT=3000
 EXPOSE ${SERVER_PORT}
 
-HEALTHCHECK --interval=10s --timeout=5s --start-period=3s --retries=3 \
+HEALTHCHECK --interval=60s --start-period=120s\
     CMD curl -s -f http://localhost:${SERVER_PORT}/status || exit 1
 
 ENTRYPOINT java -jar ssf_assessment.jar

@@ -9,7 +9,7 @@
 <body>
     <h1>Cannot post notice to the server</h1>
     <br>
-    <p th:text="'I/O error on POST request: '+${messageBody}"></p>
+    <p th:text="'I/O error on POST request for ' + ${url} + ':' + ${messageBody}"></p>
     <a th:href="@{/}">Back</a>
 </body>
 </html>

@@ -3,6 +3,7 @@ package vttp.batch5.ssf.noticeboard.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import jakarta.validation.Valid;
 import vttp.batch5.ssf.noticeboard.models.Notice;
 import vttp.batch5.ssf.noticeboard.services.NoticeService;
@@ -23,6 +22,9 @@ public class NoticeController {
 
     @Autowired
     NoticeService noticeService;
+
+    @Value("${publishingServerUrl}")
+	private String publishingServerUrl;
 
     @GetMapping("/")
     public String showLandingPage(Model model){
@@ -42,19 +44,14 @@ public class NoticeController {
         String body = responseTerms.get(1);
 
         model.addAttribute("messageBody", body); 
+        model.addAttribute("url", publishingServerUrl);
 
         return (statusCode>=200 && statusCode<300)? "successPage":"errorPage";
     }
 
-    // @GetMapping("/test")
-    // @ResponseBody
-    // public String test(){
-    //     noticeService.healthCheck();
-    //     return "ok";
-    // }
-
     @GetMapping("/status")
     public ResponseEntity<String> checkHealth(){
+        // manually change to if null
         return (noticeService.healthCheck())? ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body("ok test") : 
                                                 ResponseEntity.status(503).contentType(MediaType.APPLICATION_JSON).body("not ok test");
     }
