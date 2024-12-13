@@ -52,7 +52,7 @@ public class NoticeController {
     @GetMapping("/status")
     public ResponseEntity<String> checkHealth(){
         return (noticeService.healthCheck())? ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body("") : 
-                                                ResponseEntity.status(503).contentType(MediaType.APPLICATION_JSON).body("");
+                                                ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body("not healthy");
     }
 
 }
