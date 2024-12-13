@@ -1,5 +1,7 @@
 package vttp.batch5.ssf.noticeboard.repositories;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -54,6 +56,11 @@ public class NoticeRepository {
 
 	public String getRandomKey(){
 		return (String) objectTemplate.opsForHash().randomKey(Util.redisKey);
+	}
+
+	public boolean keySetLengthIsNull(){
+		Set<Object> keyset = objectTemplate.opsForHash().keys(Util.redisKey);
+		return keyset.size()==0;
 	}
 
 

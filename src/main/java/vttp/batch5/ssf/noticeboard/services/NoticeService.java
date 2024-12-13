@@ -73,11 +73,10 @@ public class NoticeService {
 	}
 
 	public boolean healthCheck(){
-		return noticeRepository.getRandomKey()!=null;
+		String randomKey = noticeRepository.getRandomKey();
+		boolean keysAreNull = noticeRepository.keySetLengthIsNull();
+		return (!keysAreNull && randomKey==null);
 	} 
-
-	
-
 
 	private JsonObject constructNoticeJson(Notice notice){
 		String[] terms = notice.toString().split(Util.delimiter);
