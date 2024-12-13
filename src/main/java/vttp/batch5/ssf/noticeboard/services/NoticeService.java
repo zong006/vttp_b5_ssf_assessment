@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ public class NoticeService {
 	@Autowired
 	NoticeRepository noticeRepository;
 
+	@Value("${publishingServerUrl}")
+	private String publishingServerUrl;
+
 	// TODO: Task 3
 	// You can change the signature of this method by adding any number of parameters
 	// and return any type
@@ -39,7 +43,7 @@ public class NoticeService {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> responseEntity;
 		try {
-			RequestEntity<String> requestEntity = RequestEntity.post(Util.publishingServerUrl+"/notice").contentType(MediaType.APPLICATION_JSON).body(jsonData.toString(), String.class);
+			RequestEntity<String> requestEntity = RequestEntity.post(publishingServerUrl+"/notice").contentType(MediaType.APPLICATION_JSON).body(jsonData.toString(), String.class);
 			responseEntity = restTemplate.exchange(requestEntity, String.class);
 			
 			// ========== wrong req entity for testing. delete this ==========

@@ -33,4 +33,6 @@ HEALTHCHECK --interval=10s --timeout=5s --start-period=3s --retries=3 \
 
 ENTRYPOINT java -jar ssf_assessment.jar
     
-    # ---------------------------- STAGE 2 ----------------------------
+# ---------------------------- STAGE 2 ----------------------------
+
+        

@@ -7,6 +7,6 @@ public interface Util {
 
     String delimiter = "THIS_IS_A_DELIMITER";
 
-    String publishingServerUrl = "https://publishing-production-d35a.up.railway.app/";
+    
 }
 
