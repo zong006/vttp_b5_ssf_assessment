@@ -22,7 +22,7 @@ FROM maven:3.9.9-eclipse-temurin-23
 ARG DEPLOY_DIR=/app
 
 WORKDIR ${DEPLOY_DIR}
-COPY --from=compiler /code_folder/target/target/noticeboard-0.0.1-SNAPSHOT.jar ssf_assessment.jar
+COPY --from=compiler /code_folder/target/noticeboard-0.0.1-SNAPSHOT.jar ssf_assessment.jar
 
 
 ENV SERVER_PORT=3000
