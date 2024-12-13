@@ -31,6 +31,6 @@ EXPOSE ${SERVER_PORT}
 HEALTHCHECK --interval=10s --timeout=5s --start-period=3s --retries=3 \
     CMD curl -s -f http://localhost:${SERVER_PORT}/status || exit 1
 
-ENTRYPOINT java -jar target/ssf_assessment.jar
+ENTRYPOINT java -jar ssf_assessment.jar
     
     # ---------------------------- STAGE 2 ----------------------------
