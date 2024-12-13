@@ -46,11 +46,6 @@ public class NoticeService {
 			RequestEntity<String> requestEntity = RequestEntity.post(publishingServerUrl+"/notice").contentType(MediaType.APPLICATION_JSON).body(jsonData.toString(), String.class);
 			responseEntity = restTemplate.exchange(requestEntity, String.class);
 			
-			// ========== wrong req entity for testing. delete this ==========
-			// RequestEntity<JsonObject> requestEntity2 = RequestEntity.post(Util.publishingServerUrl+"/notice").contentType(MediaType.APPLICATION_JSON).body(jsonData);
-			// responseEntity = restTemplate.exchange(requestEntity2, String.class);
-			// ========== delete this ==========
-			
 			JsonObject jsonResponse = generateRespnseJson(responseEntity);
 			String id = jsonResponse.getString("id");
 			noticeRepository.insertNotices(id, jsonResponse.toString());
@@ -78,16 +73,10 @@ public class NoticeService {
 	}
 
 	public boolean healthCheck(){
+		return noticeRepository.getRandomKey()!=null;
+	} 
 
-		try {
-			noticeRepository.getRandomKey();
-			return true;
-		} catch (Exception e) {
-			// e.printStackTrace();
-			System.out.println(e.getMessage());
-			return false;
-		}
-	}
+	
 
 
 	private JsonObject constructNoticeJson(Notice notice){

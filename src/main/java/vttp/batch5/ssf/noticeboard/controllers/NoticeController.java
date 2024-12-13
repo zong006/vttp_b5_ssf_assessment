@@ -51,9 +51,8 @@ public class NoticeController {
 
     @GetMapping("/status")
     public ResponseEntity<String> checkHealth(){
-        // manually change to if null
-        return (noticeService.healthCheck())? ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body("ok test") : 
-                                                ResponseEntity.status(503).contentType(MediaType.APPLICATION_JSON).body("not ok test");
+        return (noticeService.healthCheck())? ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body("") : 
+                                                ResponseEntity.status(503).contentType(MediaType.APPLICATION_JSON).body("");
     }
 
 }
